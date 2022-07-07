@@ -7,14 +7,16 @@ import Chat from "./components/Chat.vue";
 <template>
   <div
     v-if="!currentUser"
-    class="bg-gray-50 flex min-h-screen justify-center items-center"
+    class="bg-gray-50 flex h-screen justify-center items-center"
   >
     <Login @response="(user) => (currentUser = user)" :serverUrl="serverUrl" />
   </div>
-  <div v-else class="p-4">
-    <div class="flex items-baseline gap-4">
-      Welcome, {{ currentUser.Username }}!
-      <Logout @response="(user) => (currentUser = user)" />
+  <div v-else class="max-h-screen overflow-hidden">
+    <div class="flex items-baseline gap-4 max-h-screen overflow-hidden">
+      <Logout
+        class="absolute top-0 right-0 my-2 mx-3"
+        @response="(user) => (currentUser = user)"
+      />
     </div>
     <Chat :currentUser="currentUser" :serverUrl="serverUrl" />
   </div>
@@ -25,7 +27,8 @@ export default {
   data() {
     return {
       currentUser: null,
-      serverUrl: "http://localhost:5000/",
+      // serverUrl: "http://localhost:5000/",
+      serverUrl: "https://nodevuerest.ericzheng28.repl.co/",
     };
   },
   methods: {
